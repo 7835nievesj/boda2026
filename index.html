@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nos Casamos – 9 de mayo de 2026</title>
+  <meta name="description" content="Sitio web de boda. Información de ceremonia, recepción, RSVP, hospedaje y más. Todo en español." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff;          /* fondo */
+      --fg:#1f2937;          /* texto */
+      --muted:#6b7280;       /* texto secundario */
+      --brand:#8c6b4f;       /* dorado/terracota suave */
+      --brand-2:#5b6d5b;     /* verde oliva */
+      --card:#f8f7f5;        /* paneles */
+      --border:#e5e7eb;      /* bordes */
+      --radius:18px;
+      --shadow:0 10px 25px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background:var(--bg); color:var(--fg);
+      font-family:Montserrat, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.6;
+    }
+    /* Header */
+    .topbar{
+      position:sticky; top:0; z-index:40; background:rgba(255,255,255,.85);
+      backdrop-filter:saturate(160%) blur(8px); border-bottom:1px solid var(--border);
+    }
+    .container{max-width:1100px; margin:0 auto; padding:0 20px}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{font-family:"Playfair Display", serif; font-weight:700; letter-spacing:.5px;}
+    .brand a{color:var(--fg); text-decoration:none}
+    .nav a{color:var(--fg); text-decoration:none; font-weight:500}
+    .menu{display:flex; gap:18px; flex-wrap:wrap}
+    .btn{
+      display:inline-block; padding:12px 18px; border-radius:999px; background:var(--brand);
+      color:white; text-decoration:none; font-weight:600; letter-spacing:.2px; box-shadow:var(--shadow);
+    }
+    .btn.alt{background:var(--brand-2)}
+
+    /* Hero */
+    .hero{
+      display:grid; grid-template-columns:1.05fr .95fr; gap:24px; align-items:center; padding:56px 0;
+    }
+    .hero h1{font-family:"Playfair Display", serif; font-size:clamp(36px, 5vw, 56px); line-height:1.1; margin:0 0 10px}
+    .hero p.lead{font-size:1.1rem; color:var(--muted); margin:0 0 24px}
+    .hero .card{background:var(--card); padding:22px; border-radius:var(--radius); border:1px solid var(--border)}
+    .hero .meta{display:flex; gap:14px; flex-wrap:wrap; color:var(--fg)}
+    .hero .meta div{background:white; border:1px solid var(--border); padding:10px 14px; border-radius:12px}
+    .hero img{width:100%; height:auto; border-radius:var(--radius); box-shadow:var(--shadow); object-fit:cover}
+
+    /* Sections */
+    section{padding:72px 0; border-top:1px solid var(--border)}
+    h2.section-title{font-family:"Playfair Display", serif; font-size:clamp(28px, 3.6vw, 40px); margin:0 0 22px}
+    p.muted{color:var(--muted)}
+
+    .grid{display:grid; gap:22px}
+    .grid.cols-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+    .grid.cols-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:22px}
+
+    /* Timeline */
+    .timeline{position:relative; padding-left:22px}
+    .timeline:before{content:""; position:absolute; left:8px; top:6px; bottom:6px; width:2px; background:var(--border)}
+    .tl-item{position:relative; margin:18px 0}
+    .tl-item:before{content:""; position:absolute; left:-2px; top:6px; width:10px; height:10px; border-radius:999px; background:var(--brand)}
+
+    /* RSVP form */
+    .form{display:grid; gap:14px}
+    .form .row{display:grid; gap:14px; grid-template-columns:1fr 1fr}
+    .form label{font-weight:600}
+    .form input, .form select, .form textarea{
+      width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:12px; background:white; font:inherit
+    }
+    .form small{color:var(--muted)}
+
+    /* Gallery */
+    .gallery{display:grid; gap:14px; grid-template-columns:repeat(3, minmax(0,1fr))}
+    .gallery img{width:100%; height:220px; object-fit:cover; border-radius:14px}
+
+    /* Footer */
+    footer{padding:40px 0; color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid.cols-2{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:1fr 1fr}
+      .form .row{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 560px){
+      .gallery{grid-template-columns:1fr}
+    }
+  </style>
+  <!-- Datos estructurados (opcional) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WeddingEvent",
+    "name": "Boda de [Nombres]",
+    "startDate": "2026-05-09T16:00:00-04:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "[Nombre del lugar]",
+      "address": "[Dirección, Ciudad, Puerto Rico]"
+    },
+    "image": ["/cover.jpg"],
+    "description": "Información de ceremonia, recepción, RSVP y hospedaje.",
+    "organizer": {"@type":"Person","name":"[Nombre 1 y Nombre 2]"}
+  }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav" aria-label="Barra de navegación">
+      <div class="brand"><a href="#inicio" aria-label="Ir a inicio">Boda – 09.05.2026</a></div>
+      <nav class="menu" aria-label="Secciones del sitio">
+        <a href="#historia">Nuestra historia</a>
+        <a href="#detalles">Detalles</a>
+        <a href="#vestimenta">Vestimenta</a>
+        <a href="#menu">Menú</a>
+        <a href="#hospedaje">Alojamiento</a>
+        <a href="#regalos">Regalos</a>
+        <a href="#rsvp" class="btn">Confirmar asistencia</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero / Inicio -->
+    <section id="inicio" class="container hero" aria-labelledby="bienvenida-title">
+      <div>
+        <h1 id="bienvenida-title">Nos casamos</h1>
+        <p class="lead">Con mucha alegría queremos compartir con ustedes este día tan especial. Los esperamos para celebrar juntos el <strong>9 de mayo de 2026</strong> en <strong>Puerto Rico</strong>.</p>
+        <div class="card" aria-label="Datos principales">
+          <div class="meta">
+            <div><strong>Fecha:</strong> 9 de mayo de 2026</div>
+            <div><strong>Ceremonia:</strong> 4:00 p. m.</div>
+            <div><strong>Recepción:</strong> 6:00 p. m.</div>
+            <div><strong>Lugar:</strong> [Nombre del lugar]</div>
+          </div>
+        </div>
+        <p style="margin-top:18px"><a class="btn alt" href="#rsvp">Confirmar asistencia</a></p>
+      </div>
+      <div>
+        <!-- Reemplaza /cover.jpg por tu foto (2000x1400 recomendado) -->
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=2000&auto=format&fit=crop" alt="Foto de la pareja" />
+      </div>
+    </section>
+
+    <!-- Historia -->
+    <section id="historia" class="container" aria-labelledby="historia-title">
+      <h2 class="section-title" id="historia-title">Nuestra historia</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <h3>Cómo nos conocimos</h3>
+          <p class="muted">Un breve relato de su primer encuentro. Incluye año, ciudad y un detalle personal.</p>
+        </div>
+        <div class="tl-item">
+          <h3>La propuesta</h3>
+          <p class="muted">Descripción del momento de la propuesta y lo que significó para ustedes.</p>
+        </div>
+        <div class="tl-item">
+          <h3>Rumbo al gran día</h3>
+          <p class="muted">Hitos y preparativos que desean compartir con los invitados.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detalles del evento -->
+    <section id="detalles" class="container" aria-labelledby="detalles-title">
+      <h2 class="section-title" id="detalles-title">Detalles del evento</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Ceremonia</h3>
+          <p><strong>Hora:</strong> 4:00 p. m.</p>
+          <p><strong>Lugar:</strong> [Nombre del lugar – jardín principal]</p>
+          <div style="height:240px; border-radius:12px; overflow:hidden; border:1px solid var(--border)">
+            <!-- Reemplaza el src con el iframe de Google Maps de tu lugar -->
+            <iframe title="Mapa de la ceremonia" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.150366339745!2d-66.614!3d18.011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z!5e0!3m2!1ses!2spr!4v1710000000000" width="100%" height="100%" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Recepción</h3>
+          <p><strong>Hora:</strong> 6:00 p. m.</p>
+          <p><strong>Lugar:</strong> [Salón principal / terraza]</p>
+          <ul>
+            <li>Estacionamiento disponible.</li>
+            <li>Se recomienda llegar con 30 minutos de antelación.</li>
+            <li>Niños bienvenidos, favor indicarlo en el RSVP.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vestimenta -->
+    <section id="vestimenta" class="container" aria-labelledby="vestimenta-title">
+      <h2 class="section-title" id="vestimenta-title">Código de vestimenta</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <p>Formal de día. Mujeres: vestido largo o midi elegante. Hombres: traje oscuro con corbata. Paleta sugerida: marfil, oliva, terracota, dorado suave.</p>
+        </div>
+        <div class="card">
+          <p>Consejo: el evento será al aire libre durante la ceremonia. Se sugiere calzado cómodo y un pañuelo ligero para el atardecer.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menú -->
+    <section id="menu" class="container" aria-labelledby="menu-title">
+      <h2 class="section-title" id="menu-title">Selección de menú</h2>
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Pechuga orgánica de pollo</h3>
+          <p class="muted">Rellena de cremini, con Chianti Au Jus.</p>
+        </div>
+        <div class="card">
+          <h3>Filete Black Angus</h3>
+          <p class="muted">Acompañado de salsa de pimienta.</p>
+        </div>
+        <div class="card">
+          <h3>Salmón asado</h3>
+          <p class="muted">Con crumble de Marcona y Shishito.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hospedaje y transporte -->
+    <section id="hospedaje" class="container" aria-labelledby="hospedaje-title">
+      <h2 class="section-title" id="hospedaje-title">Alojamiento y transporte</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Hoteles cercanos</h3>
+          <ul>
+            <li>[Hotel 1] – enlace para reservar</li>
+            <li>[Hotel 2] – enlace para reservar</li>
+            <li>[Hotel 3] – enlace para reservar</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Traslados</h3>
+          <ul>
+            <li>Uber y taxis locales disponibles.</li>
+            <li>Estacionamiento en sede con valet.</li>
+            <li>Transporte grupal del hotel (si aplica).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Regalos -->
+    <section id="regalos" class="container" aria-labelledby="regalos-title">
+      <h2 class="section-title" id="regalos-title">Lista de regalos</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <p>Su presencia es nuestro mejor regalo. Si desean obsequiarnos, pueden visitar nuestra mesa de regalos.</p>
+          <p><a class="btn" href="#" target="_blank" rel="noopener">Ver mesa de regalos</a></p>
+        </div>
+        <div class="card">
+          <p>También pueden contribuir a nuestra luna de miel.</p>
+          <p><a class="btn alt" href="#" target="_blank" rel="noopener">Fondo de luna de miel</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp" class="container" aria-labelledby="rsvp-title">
+      <h2 class="section-title" id="rsvp-title">Confirmar asistencia (RSVP)</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <!--
+            Conecta este formulario a:
+            1) Google Forms: reemplaza action/inputs por los entry.xxxx adecuados
+            2) Netlify Forms: añade data-netlify="true" y un input hidden name="form-name"
+            3) Formspree / Getform / Basin: pega aquí el endpoint en action
+          -->
+          <form class="form" id="rsvpForm" action="#" method="POST" novalidate>
+            <div class="row">
+              <div>
+                <label for="nombre">Nombre completo</label>
+                <input id="nombre" name="nombre" type="text" required placeholder="Nombre y apellido" />
+              </div>
+              <div>
+                <label for="email">Correo electrónico</label>
+                <input id="email" name="email" type="email" required placeholder="nombre@correo.com" />
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label for="asistencia">¿Asistirás?</label>
+                <select id="asistencia" name="asistencia" required>
+                  <option value="">Selecciona una opción</option>
+                  <option value="si">Sí, confirmaré</option>
+                  <option value="no">No podré asistir</option>
+                </select>
+              </div>
+              <div>
+                <label for="acompanantes">Número de acompañantes</label>
+                <select id="acompanantes" name="acompanantes">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label for="menuSel">Selección de menú</label>
+                <select id="menuSel" name="menu">
+                  <option value="pollo">Pechuga orgánica de pollo – Chianti Au Jus</option>
+                  <option value="res">Filete Black Angus – Salsa de pimienta</option>
+                  <option value="salmon">Salmón asado – Crumble de Marcona y Shishito</option>
+                </select>
+              </div>
+              <div>
+                <label for="alergias">Alergias o requerimientos</label>
+                <input id="alergias" name="alergias" type="text" placeholder="Ej. nueces, lácteos, vegetariano" />
+              </div>
+            </div>
+            <div>
+              <label for="mensaje">Mensaje para los novios</label>
+              <textarea id="mensaje" name="mensaje" rows="4" placeholder="Deja un mensaje opcional"></textarea>
+            </div>
+            <div>
+              <button class="btn" type="submit">Enviar RSVP</button>
+              <small>Al enviar aceptas el uso de tus datos únicamente para la organización del evento.</small>
+            </div>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Preguntas frecuentes</h3>
+          <details>
+            <summary>¿Puedo llevar acompañante?</summary>
+            <p>Si tu invitación indica “y acompañante”, por favor confírmalo en el formulario.</p>
+          </details>
+          <details>
+            <summary>¿Habrá estacionamiento?</summary>
+            <p>Sí, hay valet o estacionamiento en el lugar. Sugerimos llegar con 30 minutos de antelación.</p>
+          </details>
+          <details>
+            <summary>¿Hay opciones vegetarianas o sin gluten?</summary>
+            <p>Sí. Indícalo en “Alergias o requerimientos” y coordinaremos con el catering.</p>
+          </details>
+          <details>
+            <summary>Clima</summary>
+            <p>Ceremonia al aire libre y recepción bajo techo. Trae un pañuelo ligero para el atardecer.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galería (opcional) -->
+    <section id="galeria" class="container" aria-labelledby="galeria-title">
+      <h2 class="section-title" id="galeria-title">Galería</h2>
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop" alt="Foto 1"/>
+        <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1600&auto=format&fit=crop" alt="Foto 2"/>
+        <img src="https://images.unsplash.com/photo-1522673607200-07e9f57a5e8e?q=80&w=1600&auto=format&fit=crop" alt="Foto 3"/>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="grid cols-2">
+        <div>
+          <strong>Contacto</strong>
+          <p class="muted">[Nombre 1] · [teléfono] · [correo]<br>[Nombre 2] · [teléfono] · [correo]</p>
+        </div>
+        <div>
+          <strong>Política de privacidad</strong>
+          <p class="muted">Los datos recopilados se usarán únicamente para coordinar la boda y no serán compartidos con terceros.</p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:16px">© 2026 [Nombres]. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Validación básica y ejemplo de envío simulado
+    const form = document.getElementById('rsvpForm');
+    form?.addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      // Sustituye por tu integración real (Google Forms / Formspree / Netlify)
+      alert('Gracias por confirmar. Resumen:\n' +
+        `Nombre: ${data.nombre}\nCorreo: ${data.email}\nAsistencia: ${data.asistencia}\nAcompañantes: ${data.acompanantes}\nMenú: ${data.menu}\nAlergias: ${data.alergias || '-'}\nMensaje: ${data.mensaje || '-'}`);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
